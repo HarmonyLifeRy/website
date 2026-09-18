@@ -22,7 +22,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Nunito:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --lavender:#F0E6FA;
@@ -60,9 +60,12 @@
     will-change: transform;
   }
   @keyframes auroraDrift{
-    0%{ transform:translate(0,0) scale(1); }
-    50%{ transform:translate(-1.8%,1.6%) scale(1.035); }
-    100%{ transform:translate(1.6%,-1.8%) scale(1); }
+    0%{
+      transform:translate(0,0) scale(1);
+      filter:hue-rotate(0deg);
+    }
+    50%{ transform:translate(-1.8%,1.6%) scale(1.035); filter:hue-rotate(15deg); }
+    100%{ transform:translate(1.6%,-1.8%) scale(1); filter:hue-rotate(0deg); }
   }
   h1,h2,h3,.serif{ font-family:'Cormorant Garamond', serif; }
   h1,h2,h3,summary span,.card h3,.fee-card .label,.btn-gold span,.btn-outline span,.social-card h3{ text-wrap:balance; }
@@ -191,6 +194,11 @@
     border:1px solid var(--glass-border);
     border-radius:28px;
     box-shadow:var(--shadow);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .glass:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 48px -12px rgba(107,74,142,.25), 0 4px 16px -4px rgba(196,160,96,.2);
   }
 
   .hero{ padding-top:38px; padding-bottom:14px; text-align:center; }
@@ -210,7 +218,10 @@
     position:relative; z-index:1;
     box-shadow:0 0 0 1px rgba(196,160,96,.5), 0 20px 50px -10px rgba(107,74,142,.45);
   }
-  @keyframes breathe{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.035);} }
+  @keyframes breathe{
+    0%,100%{ transform:scale(1); filter:drop-shadow(0 0 0px rgba(196,160,96,0)); }
+    50%{ transform:scale(1.045); filter:drop-shadow(0 0 18px rgba(196,160,96,.55)); }
+  }
 
   .hero h1{
     font-size:3rem; font-weight:700; color:#7C5A9E;
@@ -226,6 +237,35 @@
     color:var(--purple-main); margin-bottom:16px;
   }
   .hero .desc{ max-width:560px; margin:0 auto 26px; color:var(--ink-soft); font-size:1.02rem; line-height:1.65; }
+  .about-slogan{ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.1rem,4.8vw,1.55rem); color:var(--gold); text-align:center; margin-top:18px; letter-spacing:.03em; }
+  .pullquote-section{ padding:40px 0 36px; position:relative; z-index:1; }
+  .pullquote{
+    max-width:640px; margin:0 auto; text-align:center;
+    position:relative; padding:32px 40px;
+  }
+  .pullquote::before,.pullquote::after{
+    content:'\201C'; font-family:'Cormorant Garamond',serif;
+    font-size:7rem; line-height:1; color:var(--gold);
+    position:absolute; opacity:.35; leading-trim:both;
+  }
+  .pullquote::before{ top:-18px; left:10px; }
+  .pullquote::after{ content:'\201D'; bottom:-52px; right:10px; }
+  .pullquote p{
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:clamp(1.25rem,5vw,1.75rem); line-height:1.6;
+    color:var(--purple-dark); margin:0 0 12px;
+  }
+  .pullquote cite{ font-size:.8rem; color:var(--ink-soft); letter-spacing:.08em; text-transform:uppercase; }
+  .wave-sep{ overflow:hidden; line-height:0; height:48px; margin:-1px 0; }
+  .wave-sep svg{ display:block; width:100%; height:48px; }
+  .wave-sep.gold svg path{ fill:rgba(196,160,96,.12); }
+  .wave-sep.purple svg path{ fill:rgba(196,168,224,.18); }
+  .resource-card{ display:flex; align-items:center; gap:14px; background:rgba(255,255,255,.55); border:1px solid rgba(196,160,96,.25); border-radius:18px; padding:18px 22px; margin-bottom:14px; text-decoration:none; color:var(--ink); transition:transform .2s,box-shadow .2s; }
+  .resource-card:hover{ transform:translateY(-2px); box-shadow:0 8px 24px -8px rgba(196,160,96,.35); }
+  .resource-card .res-icon{ width:42px; height:42px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .resource-card .res-icon svg{ width:20px; height:20px; color:#fff; }
+  .resource-card .res-title{ font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; color:var(--purple-main); }
+  .resource-card .res-sub{ font-size:.8rem; color:var(--ink-soft); margin-top:2px; }
   .hero .founded{
     display:inline-block; font-size:.8rem; letter-spacing:.05em; color:var(--ink-soft);
     border:1px solid rgba(196,160,96,.4); border-radius:999px; padding:8px 18px; margin-bottom:34px;
@@ -335,6 +375,9 @@
   .fee-card .amount{ font-family:'Cormorant Garamond',serif; font-size:2.6rem; font-weight:700; color:var(--gold); }
   .fee-card .label{ font-size:.92rem; color:var(--ink-soft); margin-top:6px; }
   .membership-text{ text-align:center; max-width:560px; margin:26px auto 0; color:var(--ink-soft); font-size:.94rem; line-height:1.65; }
+  .nonprofit-note{ display:flex; align-items:flex-start; gap:12px; max-width:560px; margin:18px auto 0; background:rgba(196,160,96,.08); border:1px solid rgba(196,160,96,.25); border-radius:16px; padding:16px 20px; text-align:left; overflow:visible; }
+  .nonprofit-note svg{ flex-shrink:0; margin-top:3px; color:var(--gold); width:20px; height:20px; }
+  .nonprofit-note p{ margin:0; color:var(--ink-soft); font-size:.87rem; line-height:1.7; word-break:normal; overflow-wrap:break-word; }
 
   .contact-panel{ padding:44px 38px; }
   .organizer-note{ display:none; }
@@ -451,7 +494,7 @@
   <div class="hero-buttons">
     <a class="btn-gold" href="https://t.me/HARMONY_life_ry" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
-      <span data-i18n="hero.cta2">Вступить в организацию</span>
+      <span data-i18n="hero.cta2">Стать частью Harmony</span>
     </a>
     <a class="btn-outline" href="https://t.me/Harmony_Ry" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-1.9 5.4 8.5 8.5 0 0 1-7.6 3 8.38 8.38 0 0 1-3.4-.9L3 21l1.9-5a8.38 8.38 0 0 1-.9-3.5 8.5 8.5 0 0 1 3-7.6A8.38 8.38 0 0 1 12.5 3h.3a8.5 8.5 0 0 1 8 8.2v.3Z"/></svg>
@@ -459,13 +502,6 @@
     </a>
   </div>
 </section>
-
-<div class="wave-divider">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-    <path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,40 L1440,100 L0,100 Z" fill="#ffffff" opacity="0.4"/>
-    <path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,40" fill="none" stroke="#C4A060" stroke-width="1.5" opacity="0.5"/>
-  </svg>
-</div>
 
 <section id="about">
   <div class="wrap">
@@ -477,7 +513,41 @@
     </div>
     <div class="glass about-panel">
       <p data-i18n="about.text">HARMONY LIFE — общественная организация в Финляндии. Мы создаём тёплую и безопасную среду для интеграции, саморазвития и творческой реализации. Наша миссия — равенство, поддержка и раскрытие потенциала каждого человека.</p>
+      <p class="about-slogan" data-i18n="about.slogan">Будь собой — откройся в Harmony</p>
     </div>
+  </div>
+</section>
+
+<section class="pullquote-section">
+  <div class="wrap">
+    <div class="pullquote">
+      <p data-i18n="quote.text">Относись к людям так, как хочешь, чтобы относились к тебе</p>
+      <cite data-i18n="quote.source">— Принцип Harmony</cite>
+    </div>
+  </div>
+</section>
+
+<section id="resources" class="resources-section">
+  <div class="wrap">
+    <h2 class="title" data-i18n="resources.title">Первые шаги</h2>
+    <div class="divider"><span class="line"></span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><g><ellipse cx="12" cy="6.4" rx="1.55" ry="4.4"/><ellipse cx="12" cy="6.4" rx="1.55" ry="4.4" transform="rotate(45 12 12)"/><ellipse cx="12" cy="6.4" rx="1.55" ry="4.4" transform="rotate(90 12 12)"/><ellipse cx="12" cy="6.4" rx="1.55" ry="4.4" transform="rotate(135 12 12)"/><ellipse cx="12" cy="6.4" rx="1.55" ry="4.4" transform="rotate(180 12 12)"/><ellipse cx="12" cy="6.4" rx="1.55" ry="4.4" transform="rotate(225 12 12)"/><ellipse cx="12" cy="6.4" rx="1.55" ry="4.4" transform="rotate(270 12 12)"/><ellipse cx="12" cy="6.4" rx="1.55" ry="4.4" transform="rotate(315 12 12)"/><circle cx="12" cy="12" r="2" fill="#fff" opacity=".9"/><circle cx="12" cy="12" r="1.1" fill="currentColor" opacity=".65"/></g></svg>
+      <span class="line"></span>
+    </div>
+    <a class="resource-card" href="https://t.me/harmony_life_ry_bot/GIDOFKAINUU" target="_blank" rel="noopener">
+      <div class="res-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z"/></svg></div>
+      <div>
+        <div class="res-title" data-i18n="resources.kainuu.title">Гид жителя Kainuu</div>
+        <div class="res-sub" data-i18n="resources.kainuu.sub">Всё важное о жизни в регионе Кайнуу</div>
+      </div>
+    </a>
+    <a class="resource-card" href="https://t.me/harmony_life_ry_bot/Tervetuloa" target="_blank" rel="noopener">
+      <div class="res-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div>
+      <div>
+        <div class="res-title" data-i18n="resources.newcomer.title">Гид новосёла Финляндии</div>
+        <div class="res-sub" data-i18n="resources.newcomer.sub">Путеводитель для тех, кто только переехал</div>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -514,12 +584,20 @@
   </div>
 </section>
 
-<div class="wave-divider flip">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-    <path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,40 L1440,100 L0,100 Z" fill="#ffffff" opacity="0.4"/>
-    <path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,40" fill="none" stroke="#C4A060" stroke-width="1.5" opacity="0.5"/>
-  </svg>
-</div>
+<section id="services" class="compact-section">
+  <div class="wrap">
+    <details class="glass services-panel">
+      <summary>
+        <span data-i18n="services.title">НАШИ УСЛУГИ</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+      <div class="services-body">
+        <div class="services-list" id="services-list"></div>
+        <p class="services-note" data-i18n="services.note">Для лиц, не являющихся членами организации, стоимость всех услуг в 2 раза выше</p>
+      </div>
+    </details>
+  </div>
+</section>
 
 <section id="practice" class="compact-section">
   <div class="wrap">
@@ -539,8 +617,8 @@
       <div class="glass card practice-card">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M9 12.5 7 22l5-3 5 3-2-9.5"/></svg></div>
         <h3 data-i18n="practice.2.title">Волонтёрство</h3>
-        <p data-i18n="practice.2.text">Помогай сообществу и получи официальный документ о волонтёрской деятельности — он усилит резюме при трудоустройстве или поступлении на учёбу.</p>
-        <span class="tag" data-i18n="practice.2.tag">Документ для резюме и учёбы</span>
+        <p data-i18n="practice.2.text">Помогай сообществу и получи официальный документ о волонтёрской деятельности — он усилит резюме при трудоустройстве, поступлении на учёбу, а также может стать важным аргументом при получении гражданства Финляндии.</p>
+        <span class="tag" data-i18n="practice.2.tag">Документ для резюме, учёбы и гражданства</span>
       </div>
     </div>
     <div class="practice-cta">
@@ -570,29 +648,11 @@
         <div class="label" data-i18n="membership.other">для остальных</div>
       </div>
     </div>
-    <p class="membership-text" data-i18n="membership.text">Членский взнос открывает доступ к льготным ценам на услуги и мероприятиям клуба.</p>
-  </div>
-</section>
-
-<div class="wave-divider">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-    <path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,40 L1440,100 L0,100 Z" fill="#ffffff" opacity="0.4"/>
-    <path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,40" fill="none" stroke="#C4A060" stroke-width="1.5" opacity="0.5"/>
-  </svg>
-</div>
-
-<section id="services" class="compact-section">
-  <div class="wrap">
-    <details class="glass services-panel">
-      <summary>
-        <span data-i18n="services.title">НАШИ УСЛУГИ</span>
-        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-      </summary>
-      <div class="services-body">
-        <div class="services-list" id="services-list"></div>
-        <p class="services-note" data-i18n="services.note">Для лиц, не являющихся членами организации, стоимость всех услуг в 2 раза выше</p>
-      </div>
-    </details>
+    <p class="membership-text" data-i18n="membership.text">Членский взнос — это твой вход в сообщество: участие в мероприятиях и льготные цены на наши услуги.</p>
+    <div class="nonprofit-note">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <p data-i18n="membership.nonprofit">Harmony Life — некоммерческая организация. Каждый взнос идёт людям: на события, поддержку и развитие сообщества. Если когда-нибудь Harmony завершит свой путь — всё созданное останется служить той же цели, ради которой всё начиналось.</p>
+    </div>
   </div>
 </section>
 
@@ -625,13 +685,6 @@
     </div>
   </div>
 </section>
-
-<div class="wave-divider flip">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-    <path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,40 L1440,100 L0,100 Z" fill="#ffffff" opacity="0.4"/>
-    <path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,40" fill="none" stroke="#C4A060" stroke-width="1.5" opacity="0.5"/>
-  </svg>
-</div>
 
 <section id="social">
   <div class="wrap">
@@ -668,21 +721,21 @@
 const translations = {
   ru:{
     "nav.about":"О нас","nav.directions":"Направления","nav.services":"Услуги","nav.support":"Поддержка идей","nav.membership":"Членство","nav.contacts":"Контакты","nav.social":"Соцсети",
-    "hero.title":"HARMONY LIFE RY","hero.slogan":"Будь собой — откройся в HARMONY","hero.desc":"Общественная организация в Финляндии, объединяющая людей разных культур для интеграции, саморазвития и творчества","hero.cta":"Связаться с Председателем","hero.cta2":"Вступить в организацию",
+    "hero.title":"HARMONY LIFE RY","hero.slogan":"Будь собой — откройся в HARMONY","hero.desc":"Общественная организация в Финляндии, объединяющая людей разных культур для интеграции, саморазвития и творчества","hero.cta":"Связаться с Председателем","hero.cta2":"Стать частью Harmony",
     "about.eyebrow":"HARMONY LIFE RY","about.title":"О организации","about.text":"HARMONY LIFE — общественная организация в Финляндии. Мы создаём тёплую и безопасную среду для интеграции, саморазвития и творческой реализации. Наша миссия — равенство, поддержка и раскрытие потенциала каждого человека.",
     "directions.title":"Чем мы занимаемся",
     "directions.1.title":"Помощь и консультации","directions.1.text":"Индивидуальное сопровождение мигрантов, консультации и услуги перевода.",
     "directions.2.title":"Образование и рост","directions.2.text":"Языковые курсы, прикладные мастер-классы и актуальные тренинги.",
     "directions.3.title":"Творчество и досуг","directions.3.text":"Театральная студия, музыка, танцы и изобразительное искусство.",
     "directions.4.title":"События для души","directions.4.text":"Тематические встречи, экскурсии, ретриты и культурные мероприятия.","directions.support":"Если у тебя есть идея или желание попробовать себя в чём-то новом — расскажи нам. Мы поможем с площадкой, командой и поддержкой, чтобы воплотить её в жизнь.",
-    "practice.title":"Практика и волонтёрство","practice.subtitle":"Получи реальный опыт в Финляндии — практика и волонтёрство помогают освоить новые навыки и получить документ, который пригодится в будущем.","practice.1.title":"Учебная и трудовая практика","practice.1.text":"Проходи практику в Финляндии по своей специальности — дизайн, перевод, администрирование, социальная работа и не только. Официальный договор и поддержка команды на каждом шагу.","practice.1.tag":"Официальный договор о практике","practice.2.title":"Волонтёрство","practice.2.text":"Помогай сообществу и получи официальный документ о волонтёрской деятельности — он усилит резюме при трудоустройстве или поступлении на учёбу.","practice.2.tag":"Документ для резюме и учёбы","practice.cta":"Оставить заявку","practice.cta.sub":"Напиши нам — подскажем, какой формат подходит именно тебе.",
+    "practice.title":"Практика и волонтёрство","practice.subtitle":"Получи реальный опыт в Финляндии — практика и волонтёрство помогают освоить новые навыки и получить документ, который пригодится в будущем.","practice.1.title":"Учебная и трудовая практика","practice.1.text":"Проходи практику в Финляндии по своей специальности — дизайн, перевод, администрирование, социальная работа и не только. Официальный договор и поддержка команды на каждом шагу.","practice.1.tag":"Официальный договор о практике","practice.2.title":"Волонтёрство","practice.2.text":"Помогай сообществу и получи официальный документ о волонтёрской деятельности — он усилит резюме при трудоустройстве, поступлении на учёбу, а также может стать важным аргументом при получении гражданства Финляндии.","practice.2.tag":"Документ для резюме, учёбы и гражданства","practice.cta":"Оставить заявку","practice.cta.sub":"Напиши нам — подскажем, какой формат подходит именно тебе.",
     "services.title":"НАШИ УСЛУГИ","services.note":"Для лиц, не являющихся членами организации, стоимость всех услуг в 2 раза выше",
     "support.title":"Ваши идеи — наша поддержка","support.text":"Место, где идеи обретают форму, а мечты становятся проектами. Мы верим в ваш потенциал и готовы помочь его раскрыть.",
     "support.1":"Расскажите нам о своей идее или желании проявить себя.","support.2":"Мы предоставим площадку, команду или экспертную помощь в меру наших возможностей.","support.3":"Получите опыт работы с людьми и новые навыки в безопасной среде.",
-    "membership.title":"Членство","membership.working":"для работающих","membership.other":"для остальных","membership.text":"Членский взнос открывает доступ к льготным ценам на услуги и мероприятиям клуба.",
+    "membership.title":"Членство","membership.working":"для работающих","membership.other":"для остальных","membership.text":"Членский взнос — это твой вход в сообщество: участие в мероприятиях и льготные цены на наши услуги.","membership.nonprofit":"Harmony Life — некоммерческая организация. Каждый взнос идёт людям: на события, поддержку и развитие сообщества. Если когда-нибудь Harmony завершит свой путь — всё созданное останется служить той же цели, ради которой всё начиналось.",
     "contacts.title":"Контакты","contacts.phone":"Телефон / WhatsApp","contacts.telegram":"Telegram","contacts.email":"Email","contacts.address":"Адрес","contacts.organizer":"Организатор",
     "share.btn":"Поделиться","share.copied":"Ссылка скопирована","social.title":"Мы в соцсетях","social.telegram":"Telegram","social.instagram":"Instagram","social.facebook":"Facebook",
-    "welcome.text":"Добро пожаловать","footer.text":"Общественная организация · Каяани, Финляндия",
+    "quote.text":"Относись к людям так, как хочешь, чтобы относились к тебе","quote.source":"— Принцип Harmony","about.slogan":"Будь собой — откройся в Harmony","resources.title":"Первые шаги","resources.kainuu.title":"Гид жителя Kainuu","resources.kainuu.sub":"Путеводитель по жизни в регионе Кайнуу — от медицины до досуга","resources.newcomer.title":"Гид новосёла Финляндии","resources.newcomer.sub":"Всё, что нужно знать при переезде в Финляндию","welcome.text":"Добро пожаловать","footer.text":"Общественная организация · Каяани, Финляндия",
     services:[
       ["Услуги переводчика: первый час — 20 €, последующий","10 €"],["Регистрация в реестре населения","20 €"],["Оформление документов в KELA","20 €"],
       ["Оформление документов в налоговой (Verotoimisto)","20 €"],["Открытие банковского счёта и вопросы, связанные с банком","20 €"],
@@ -692,7 +745,7 @@ const translations = {
   },
   uk:{
     "nav.about":"Про нас","nav.directions":"Напрямки","nav.services":"Послуги","nav.support":"Підтримка ідей","nav.membership":"Членство","nav.contacts":"Контакти","nav.social":"Соцмережі",
-    "hero.title":"HARMONY LIFE RY","hero.slogan":"Будь собою — розкрийся в HARMONY","hero.desc":"Громадська організація у Фінляндії, що об'єднує людей різних культур для інтеграції, саморозвитку та творчості","hero.cta":"Зв\u2019язатися з Головою","hero.cta2":"Приєднатися до організації",
+    "hero.title":"HARMONY LIFE RY","hero.slogan":"Будь собою — розкрийся в HARMONY","hero.desc":"Громадська організація у Фінляндії, що об'єднує людей різних культур для інтеграції, саморозвитку та творчості","hero.cta":"Зв\u2019язатися з Головою","hero.cta2":"Стати частиною Harmony",
     "about.eyebrow":"HARMONY LIFE RY","about.title":"Про організацію","about.text":"HARMONY LIFE — громадська організація у Фінляндії. Ми створюємо тепле та безпечне середовище для інтеграції, саморозвитку та творчої реалізації. Наша місія — рівність, підтримка та розкриття потенціалу кожної людини.",
     "directions.title":"Чим ми займаємось",
     "directions.1.title":"Допомога та консультації","directions.1.text":"Індивідуальний супровід мігрантів, консультації та послуги перекладу.",
@@ -703,10 +756,10 @@ const translations = {
     "services.title":"НАШІ ПОСЛУГИ","services.note":"Для осіб, які не є членами організації, вартість усіх послуг удвічі вища",
     "support.title":"Ваші ідеї — наша підтримка","support.text":"Місце, де ідеї набувають форми, а мрії стають проєктами. Ми віримо у ваш потенціал і готові допомогти його розкрити.",
     "support.1":"Розкажіть нам про свою ідею або бажання проявити себе.","support.2":"Ми надамо майданчик, команду або експертну допомогу в межах наших можливостей.","support.3":"Отримайте досвід роботи з людьми та нові навички в безпечному середовищі.",
-    "membership.title":"Членство","membership.working":"для працюючих","membership.other":"для решти","membership.text":"Членський внесок відкриває доступ до пільгових цін на послуги та заходи клубу.",
+    "membership.title":"Членство","membership.working":"для працюючих","membership.other":"для решти","membership.text":"Членський внесок — це твій вхід у спільноту: участь у заходах і пільгові ціни на наші послуги.","membership.nonprofit":"Harmony Life — некомерційна організація. Кожен внесок іде людям: на події, підтримку та розвиток спільноти. Якщо колись Harmony завершить свій шлях — усе створене залишиться служити тій самій меті, заради якої все починалося.",
     "contacts.title":"Контакти","contacts.phone":"Телефон / WhatsApp","contacts.telegram":"Telegram","contacts.email":"Email","contacts.address":"Адреса","contacts.organizer":"Організатор",
     "share.btn":"Поділитися","share.copied":"Посилання скопійовано","social.title":"Ми в соцмережах","social.telegram":"Telegram","social.instagram":"Instagram","social.facebook":"Facebook",
-    "welcome.text":"Ласкаво просимо","footer.text":"Громадська організація · Каяані, Фінляндія",
+    "quote.text":"Стався до людей так, як хочеш, щоб ставилися до тебе","quote.source":"— Принцип Harmony","about.slogan":"Будь собою — розкрийся в Harmony","resources.title":"Перші кроки","resources.kainuu.title":"Гід жителя Kainuu","resources.kainuu.sub":"Путівник по регіону Кайнуу — від медицини до дозвілля","resources.newcomer.title":"Гід новосела Фінляндії","resources.newcomer.sub":"Все, що потрібно знати при переїзді до Фінляндії","welcome.text":"Ласкаво просимо","footer.text":"Громадська організація · Каяані, Фінляндія",
     services:[
       ["Послуги перекладача: перша година — 20 €, наступна","10 €"],["Реєстрація в реєстрі населення","20 €"],["Оформлення документів у KELA","20 €"],
       ["Оформлення документів у податковій (Verotoimisto)","20 €"],["Відкриття банківського рахунку та банківські питання","20 €"],
@@ -716,7 +769,7 @@ const translations = {
   },
   fi:{
     "nav.about":"Meistä","nav.directions":"Toiminta-alueet","nav.services":"Palvelut","nav.support":"Ideatuki","nav.membership":"Jäsenyys","nav.contacts":"Yhteystiedot","nav.social":"Somekanavat",
-    "hero.title":"HARMONY LIFE RY","hero.slogan":"Ole oma itsesi — avaudu HARMONYssa","hero.desc":"Rekisteröity yhdistys Suomessa, joka yhdistää eri kulttuurien edustajia kotoutumista, itsensä kehittämistä ja luovuutta varten","hero.cta":"Ota yhteyttä puheenjohtajaan","hero.cta2":"Liity yhdistykseen",
+    "hero.title":"HARMONY LIFE RY","hero.slogan":"Ole oma itsesi — avaudu HARMONYssa","hero.desc":"Rekisteröity yhdistys Suomessa, joka yhdistää eri kulttuurien edustajia kotoutumista, itsensä kehittämistä ja luovuutta varten","hero.cta":"Ota yhteyttä puheenjohtajaan","hero.cta2":"Tule osaksi Harmonya",
     "about.eyebrow":"HARMONY LIFE RY","about.title":"Yhdistyksestä","about.text":"HARMONY LIFE on yhdistys Suomessa. Luomme lämpimän ja turvallisen ympäristön kotoutumiselle, itsensä kehittämiselle ja luovalle itsensä toteuttamiselle. Missiomme on tasa-arvo, tuki ja jokaisen potentiaalin esiin tuominen.",
     "directions.title":"Mitä teemme",
     "directions.1.title":"Apu ja neuvonta","directions.1.text":"Henkilökohtainen tuki maahanmuuttajille, neuvonta ja tulkkauspalvelut.",
@@ -727,10 +780,10 @@ const translations = {
     "services.title":"PALVELUMME","services.note":"Muille kuin yhdistyksen jäsenille kaikkien palveluiden hinta on kaksinkertainen",
     "support.title":"Ideasi — meidän tukemme","support.text":"Paikka, jossa ideat saavat muodon ja unelmista tulee projekteja. Uskomme potentiaaliisi ja autamme sen esiin tuomisessa.",
     "support.1":"Kerro meille ideastasi tai halustasi toteuttaa itseäsi.","support.2":"Tarjoamme tilan, tiimin tai asiantuntija-avun mahdollisuuksiemme mukaan.","support.3":"Saat kokemusta ihmisten kanssa työskentelystä ja uusia taitoja turvallisessa ympäristössä.",
-    "membership.title":"Jäsenyys","membership.working":"työssäkäyville","membership.other":"muille","membership.text":"Jäsenmaksu avaa pääsyn palveluiden jäsenhintoihin ja klubin tapahtumiin.",
+    "membership.title":"Jäsenyys","membership.working":"työssäkäyville","membership.other":"muille","membership.text":"Jäsenmaksu on porttisi yhteisöön: osallistu tapahtumiin ja saa edullisemmat hinnat palveluistamme.","membership.nonprofit":"Harmony Life on rekisteröity voittoa tavoittelematon yhdistys. Jokainen maksettu jäsenmaksu palaa yhteisölle: tapahtumiin, tukeen ja kehitykseen. Jos Harmony joskus päättää toimintansa, kaikki luotu jää palvelemaan samaa tarkoitusta, josta kaikki alkoi.",
     "contacts.title":"Yhteystiedot","contacts.phone":"Puhelin / WhatsApp","contacts.telegram":"Telegram","contacts.email":"Sähköposti","contacts.address":"Osoite","contacts.organizer":"Järjestäjä",
     "share.btn":"Jaa","share.copied":"Linkki kopioitu","social.title":"Löydät meidät somesta","social.telegram":"Telegram","social.instagram":"Instagram","social.facebook":"Facebook",
-    "welcome.text":"Tervetuloa","footer.text":"Rekisteröity yhdistys · Kajaani, Suomi",
+    "quote.text":"Kohtele muita niin kuin haluaisit itseäsi kohdeltavan","quote.source":"— Harmonyn periaate","about.slogan":"Ole oma itsesi — avaudu HARMONYssa","resources.title":"Ensiaskeleet","resources.kainuu.title":"Kainuun asukkaan opas","resources.kainuu.sub":"Kattava opas elämiseen Kainuun alueella — terveydenhuollosta vapaa-aikaan","resources.newcomer.title":"Uuden asukkaan opas Suomeen","resources.newcomer.sub":"Kaikki mitä tarvitset tietää muuttaessasi Suomeen","welcome.text":"Tervetuloa","footer.text":"Rekisteröity yhdistys · Kajaani, Suomi",
     services:[
       ["Tulkkauspalvelut: ensimmäinen tunti — 20 €, seuraavat","10 €"],["Rekisteröinti väestörekisteriin","20 €"],["KELA-asiointi","20 €"],
       ["Verotoimiston asiointi","20 €"],["Pankkitilin avaus ja pankkiasiat","20 €"],
@@ -740,7 +793,7 @@ const translations = {
   },
   en:{
     "nav.about":"About","nav.directions":"What We Do","nav.services":"Services","nav.support":"Idea Support","nav.membership":"Membership","nav.contacts":"Contacts","nav.social":"Social",
-    "hero.title":"HARMONY LIFE RY","hero.slogan":"Be yourself — open up in HARMONY","hero.desc":"A registered non-profit association in Finland, bringing together people from different cultures for integration, personal growth and creativity","hero.cta":"Contact the Chairperson","hero.cta2":"Join the Organization",
+    "hero.title":"HARMONY LIFE RY","hero.slogan":"Be yourself — open up in HARMONY","hero.desc":"A registered non-profit association in Finland, bringing together people from different cultures for integration, personal growth and creativity","hero.cta":"Contact the Chairperson","hero.cta2":"Become Part of Harmony",
     "about.eyebrow":"HARMONY LIFE RY","about.title":"About the Organization","about.text":"HARMONY LIFE is a non-profit association in Finland. We create a warm, safe space for integration, personal growth and creative self-realization. Our mission is equality, support and helping everyone unlock their potential.",
     "directions.title":"What We Do",
     "directions.1.title":"Assistance & Consultations","directions.1.text":"One-on-one support for migrants, consultations and translation services.",
@@ -751,10 +804,10 @@ const translations = {
     "services.title":"OUR SERVICES","services.note":"For non-members, the price of all services is doubled",
     "support.title":"Your Ideas — Our Support","support.text":"A place where ideas take shape and dreams become projects. We believe in your potential and are ready to help you unlock it.",
     "support.1":"Tell us about your idea or your wish to express yourself.","support.2":"We'll offer a venue, a team or expert help, within our means.","support.3":"Gain experience working with people and new skills in a safe environment.",
-    "membership.title":"Membership","membership.working":"for the employed","membership.other":"for everyone else","membership.text":"Membership gives access to member pricing on services and club events.",
+    "membership.title":"Membership","membership.working":"for the employed","membership.other":"for everyone else","membership.text":"Your membership fee is your gateway to the community: join our events and enjoy discounted prices on all our services.","membership.nonprofit":"Harmony Life is a registered non-profit association. Every contribution goes back to the people: events, support and community growth. If Harmony ever comes to an end, everything created will continue to serve the same purpose it was built for.",
     "contacts.title":"Contacts","contacts.phone":"Phone / WhatsApp","contacts.telegram":"Telegram","contacts.email":"Email","contacts.address":"Address","contacts.organizer":"Organizer",
     "share.btn":"Share","share.copied":"Link copied","social.title":"Find Us on Social Media","social.telegram":"Telegram","social.instagram":"Instagram","social.facebook":"Facebook",
-    "welcome.text":"Welcome","footer.text":"Registered association · Kajaani, Finland",
+    "quote.text":"Treat people as you wish to be treated","quote.source":"— The Harmony Principle","about.slogan":"Be yourself — open up in Harmony","resources.title":"First Steps","resources.kainuu.title":"Kainuu Resident Guide","resources.kainuu.sub":"A complete guide to life in the Kainuu region — from healthcare to leisure","resources.newcomer.title":"New to Finland Guide","resources.newcomer.sub":"Everything you need to know when moving to Finland","welcome.text":"Welcome","footer.text":"Registered association · Kajaani, Finland",
     services:[
       ["Interpreter services: first hour — €20, each following hour","€10"],["Population register registration","€20"],["KELA paperwork","€20"],
       ["Tax office (Verotoimisto) paperwork","€20"],["Bank account opening & banking questions","€20"],
@@ -833,7 +886,7 @@ if (inTelegram) {
 
 // --- Share button: adaptive — Telegram native picker → OS share sheet → clipboard ---
 document.getElementById('share-btn').addEventListener('click', async function(){
-  const url = window.location.href;
+  const url = 'https://t.me/harmony_life_ry_bot/site';
   const title = 'HARMONY LIFE RY';
 
   if (inTelegram && tgApp.openTelegramLink) {
